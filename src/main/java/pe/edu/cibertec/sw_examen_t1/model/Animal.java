@@ -18,12 +18,12 @@ public class Animal {
         this.tipo = generarTipoAleatorio();
     }
 
-    private String generarNombreAleatorio() {
+    public String generarNombreAleatorio() {
         String[] nombres = {"Maximo", "Belita", "Carlita", "Natha", "Giovanna", "Alexander"};
         return nombres[new Random().nextInt(nombres.length)];
     }
 
-    private String generarTipoAleatorio() {
+    public String generarTipoAleatorio() {
         String[] tipos = {"Perro", "Gato", "Pollito", "Vaca", "Conejo", "Rata"};
         return tipos[new Random().nextInt(tipos.length)];
     }
