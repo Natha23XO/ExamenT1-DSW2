@@ -1,6 +1,5 @@
 package pe.edu.cibertec.sw_examen_t1.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -8,63 +7,60 @@ import java.util.Random;
 
 @XmlRootElement(name = "animal")
 public class Animal {
-    private String name;
-    private int age;
-    private String type;
+    private String nombre;
+    private int edad;
+    private String tipo;
 
     public Animal() {
         Random random = new Random();
-        this.name = generateRandomName();
-        this.age = random.nextInt(10) + 1;
-        this.type = generateRandomType();
+        this.nombre = generarNombreAleatorio();
+        this.edad = random.nextInt(10) + 1;
+        this.tipo = generarTipoAleatorio();
     }
 
-    private String generateRandomName() {
-        String[] names = {"Max", "Bella", "Charlie", "Luna", "Rocky", "Lucy"};
-        return names[new Random().nextInt(names.length)];
+    private String generarNombreAleatorio() {
+        String[] nombres = {"Maximo", "Belita", "Carlita", "Natha", "Giovanna", "Alexander"};
+        return nombres[new Random().nextInt(nombres.length)];
     }
 
-    private String generateRandomType() {
-        String[] types = {"Dog", "Cat", "Bird", "Fish", "Hamster", "Rabbit"};
-        return types[new Random().nextInt(types.length)];
+    private String generarTipoAleatorio() {
+        String[] tipos = {"Perro", "Gato", "Pollito", "Vaca", "Conejo", "Rata"};
+        return tipos[new Random().nextInt(tipos.length)];
     }
 
-    @JsonProperty("name")
-    @XmlElement(name = "name")
-    public String getName() {
-        return name;
+    @XmlElement(name = "nombre")
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    @JsonProperty("age")
-    @XmlElement(name = "age")
-    public int getAge() {
-        return age;
+    @XmlElement(name = "edad")
+    public int getEdad() {
+        return edad;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
-    @JsonProperty("type")
-    @XmlElement(name = "type")
-    public String getType() {
-        return type;
+    @XmlElement(name = "tipo")
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @Override
     public String toString() {
         return "Animal{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", type='" + type + '\'' +
+                "nombre='" + nombre + '\'' +
+                ", edad=" + edad +
+                ", tipo='" + tipo + '\'' +
                 '}';
     }
 }
