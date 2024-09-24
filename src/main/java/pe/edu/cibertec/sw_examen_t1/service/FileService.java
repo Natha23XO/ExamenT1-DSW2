@@ -6,14 +6,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pe.edu.cibertec.sw_examen_t1.model.Animal;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-    @Service
-    public class FileService {
+@Service
+public class FileService {
 
     private static final String FILE_PATH = "archivo1.txt";
     private static final String XML_FILE_PATH = "archivo2.xml";
@@ -21,13 +27,26 @@ import java.util.concurrent.TimeUnit;
 
 
     public void crearArchivoTxt() throws IOException {
+        Animal animal = new Animal();
 
+        try(FileOutputStream fos = new FileOutputStream(FILE_PATH);
+            DataOutputStream dos = new DataOutputStream(fos)) {
+
+            dos.writeUTF(animal.getNombre());
+            dos.writeInt(animal.getEdad());
+            dos.writeUTF(animal.getTipo());
+
+            TimeUnit.SECONDS.sleep(10);
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void crearArchivoJson() throws Exception {
 
 
-}
+    }
     public void crearArchivoXML() throws Exception {
         TimeUnit.SECONDS.sleep(7);
         Animal animal = new Animal();
