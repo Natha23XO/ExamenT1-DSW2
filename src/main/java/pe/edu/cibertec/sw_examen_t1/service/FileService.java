@@ -1,11 +1,13 @@
 package pe.edu.cibertec.sw_examen_t1.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pe.edu.cibertec.sw_examen_t1.model.Animal;
 
+import java.io.File;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,7 +46,11 @@ public class FileService {
         }
     }
 
-    public void crearArchivoJson() throws Exception {
+    public void crearArchivoJson(Animal animal) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        TimeUnit.SECONDS.sleep(5);
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(JSON_FILE_PATH), animal);
+        log.info("JSON "+ objectMapper.writeValueAsString(animal));
 
 
     }
