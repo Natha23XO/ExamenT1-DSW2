@@ -9,6 +9,7 @@ import pe.edu.cibertec.sw_examen_t1.model.Animal;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
     @Service
@@ -28,6 +29,7 @@ import java.io.StringWriter;
 
 }
     public void crearArchivoXML() throws Exception {
+        TimeUnit.SECONDS.sleep(7);
         Animal animal = new Animal();
         JAXBContext context = JAXBContext.newInstance(Animal.class);
         Marshaller marshaller = context.createMarshaller();
