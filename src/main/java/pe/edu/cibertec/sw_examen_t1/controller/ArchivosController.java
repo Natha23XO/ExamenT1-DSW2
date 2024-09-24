@@ -16,7 +16,7 @@ public class ArchivosController {
     private final SecuenciaService secuenciaService;
 
     @GetMapping("/generar")
-    public String atenderHamburguesa() throws Exception {
+    public String generarArchivos() throws Exception {
         CompletableFuture<String> resultado = secuenciaService.creandoArchivos();
         return resultado.get();
     }
