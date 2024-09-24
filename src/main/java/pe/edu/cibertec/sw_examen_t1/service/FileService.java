@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import pe.edu.cibertec.sw_examen_t1.model.Animal;
 
@@ -29,7 +30,7 @@ public class FileService {
     private static final String XML_FILE_PATH = "archivo2.xml";
     private static final String JSON_FILE_PATH = "archivo3.json";
 
-
+    @Async
     public CompletableFuture<String> crearArchivoTxt() throws IOException {
         Animal animal = new Animal();
 
@@ -50,7 +51,7 @@ public class FileService {
         return CompletableFuture.completedFuture("Archivo TXT completado exitosamente");
     }
 
-
+    @Async
     public CompletableFuture<String> crearArchivoJson() throws Exception {
         Animal animal = new Animal();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -61,7 +62,7 @@ public class FileService {
         return CompletableFuture.completedFuture("Archivo JSON completado exitosamente");
     }
 
-
+    @Async
     public CompletableFuture<String> crearArchivoXML() throws Exception {
         Animal animal = new Animal();
         TimeUnit.SECONDS.sleep(7);
