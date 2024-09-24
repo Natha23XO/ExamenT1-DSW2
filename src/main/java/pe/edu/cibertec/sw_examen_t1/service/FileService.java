@@ -16,6 +16,7 @@ import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import java.util.concurrent.TimeUnit;
@@ -29,7 +30,7 @@ public class FileService {
     private static final String JSON_FILE_PATH = "archivo3.json";
 
 
-    public void crearArchivoTxt() throws IOException {
+    public CompletableFuture<String> crearArchivoTxt() throws IOException {
         Animal animal = new Animal();
 
         try(FileOutputStream fos = new FileOutputStream(FILE_PATH);
@@ -40,23 +41,30 @@ public class FileService {
             dos.writeUTF(animal.getTipo());
 
             TimeUnit.SECONDS.sleep(10);
+            log.info("TXT: " + animal.toString());
 
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        return CompletableFuture.completedFuture("Archivo TXT completado exitosamente");
     }
 
-    public void crearArchivoJson(Animal animal) throws Exception {
+
+    public CompletableFuture<String> crearArchivoJson() throws Exception {
+        Animal animal = new Animal();
         ObjectMapper objectMapper = new ObjectMapper();
         TimeUnit.SECONDS.sleep(5);
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(JSON_FILE_PATH), animal);
         log.info("JSON "+ objectMapper.writeValueAsString(animal));
 
-
+        return CompletableFuture.completedFuture("Archivo JSON completado exitosamente");
     }
-    public void crearArchivoXML() throws Exception {
-        TimeUnit.SECONDS.sleep(7);
+
+
+    public CompletableFuture<String> crearArchivoXML() throws Exception {
         Animal animal = new Animal();
+        TimeUnit.SECONDS.sleep(7);
         JAXBContext context = JAXBContext.newInstance(Animal.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -65,5 +73,9 @@ public class FileService {
         StringWriter stringWriter = new StringWriter();
         marshaller.marshal(animal, stringWriter);
         log.info("XML: " + stringWriter);
+
+        return CompletableFuture.completedFuture("Archivo XML completado exitosamente");
     }
+
+
 }
