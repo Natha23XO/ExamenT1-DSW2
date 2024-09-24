@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -28,8 +29,10 @@ public class FileService {
             dos.writeInt(animal.getEdad());
             dos.writeUTF(animal.getTipo());
 
-        }catch (IOException e){
-            log.error(e.getMessage());
+            TimeUnit.SECONDS.sleep(10);
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
