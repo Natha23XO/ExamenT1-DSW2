@@ -1,9 +1,14 @@
 package pe.edu.cibertec.sw_examen_t1.service;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pe.edu.cibertec.sw_examen_t1.model.Animal;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 
 @Slf4j
     @Service
@@ -23,7 +28,14 @@ import java.io.IOException;
 
 }
     public void crearArchivoXML() throws Exception {
+        Animal animal = new Animal();
+        JAXBContext context = JAXBContext.newInstance(Animal.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
+        marshaller.marshal(animal, new File(XML_FILE_PATH));
+        StringWriter stringWriter = new StringWriter();
+        marshaller.marshal(animal, stringWriter);
+        log.info("XML: " + stringWriter);
     }
-
 }
